@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private float speed = 10.0f;
+    private float speed = 90.0f;
     private Rigidbody playerRb;
     private float zbound = 6.0f;
     
@@ -43,4 +43,20 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, zbound);
         }
     }
+
+  private void OnCollisionEnter(Collision collision)
+  {
+     if (collision.gameObject.CompareTag("Enemy"))
+     {
+         Debug.Log("Player collided with enemy!");
+     }
+  }
+
+  private void OnTriggerEnter(Collider other)
+  {
+    if (other.gameObject.CompareTag("Powerup"))
+    {
+        Destroy(other.gameObject);
+    }
+  }
 }
